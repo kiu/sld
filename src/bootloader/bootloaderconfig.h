@@ -84,7 +84,7 @@ these macros are defined, the boot loader usees them.
  * it, e.g. for the ATMega88, 168 etc. You can save quite a bit of memory by
  * disabling page mode EEPROM access. Costs ~ 138 bytes.
  */
-#define HAVE_EEPROM_BYTE_ACCESS     1
+#define HAVE_EEPROM_BYTE_ACCESS     0
 /* If HAVE_EEPROM_BYTE_ACCESS is defined to 1, byte mode access to EEPROM is
  * compiled in. Byte mode is only used if the device (as identified by its
  * signature) does not support page mode for EEPROM. It is required for
@@ -94,11 +94,11 @@ these macros are defined, the boot loader usees them.
 /* If this macro is defined to 1, the boot loader will exit shortly after the
  * programmer closes the connection to the device. Costs ~36 bytes.
  */
-#define HAVE_CHIP_ERASE             0
+#define HAVE_CHIP_ERASE             1
 /* If this macro is defined to 1, the boot loader implements the Chip Erase
  * ISP command. Otherwise pages are erased on demand before they are written.
  */
-//#define SIGNATURE_BYTES             0x1e, 0x93, 0x07, 0     /* ATMega8 */
+#define SIGNATURE_BYTES             0x1e, 0x93, 0x0F, 0     /* ATMega88p */
 /* This macro defines the signature bytes returned by the emulated USBasp to
  * the programmer software. They should match the actual device at least in
  * memory size and features. If you don't define this, values for ATMega8,
@@ -132,7 +132,7 @@ these macros are defined, the boot loader usees them.
 
 #ifndef __ASSEMBLER__   /* assembler cannot parse function definitions */
 
-#define JUMPER_BIT  7   /* jumper is connected to this bit in port D, active low */
+#define JUMPER_BIT  3   /* jumper is connected to this bit in port D, active low */
 
 #ifndef MCUCSR          /* compatibility between ATMega8 and ATMega88 */
 #   define MCUCSR   MCUSR
@@ -141,9 +141,9 @@ these macros are defined, the boot loader usees them.
 static inline void  bootLoaderInit(void)
 {
     PORTD |= (1 << JUMPER_BIT);     /* activate pull-up */
-    if(!(MCUCSR & (1 << EXTRF)))    /* If this was not an external reset, ignore */
-        leaveBootloader();
-    MCUCSR = 0;                     /* clear all reset flags for next time */
+//    if(!(MCUCSR & (1 << EXTRF)))    /* If this was not an external reset, ignore */
+//        leaveBootloader();
+//    MCUCSR = 0;                     /* clear all reset flags for next time */
 }
 
 static inline void  bootLoaderExit(void)
