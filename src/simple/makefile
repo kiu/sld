@@ -41,27 +41,11 @@
 
 
 # MCU name
-MCU = atmega88a
-# Processor frequency.
-#     This will define a symbol, F_CPU, in all source code files equal to the 
-#     processor frequency. You can then use this symbol in your source code to 
-#     calculate timings. Do NOT tack on a 'UL' at the end, this will be done
-#     automatically to create a 32-bit value in your source code.
-#     Typical values are:
-#         F_CPU =  1000000
-#         F_CPU =  1843200
-#         F_CPU =  2000000
-#         F_CPU =  3686400
-#         F_CPU =  4000000
-#         F_CPU =  7372800
-#         F_CPU =  8000000
-#         F_CPU = 11059200
-         F_CPU = 12000000
-#         F_CPU = 14745600
-#         F_CPU = 16000000
-#         F_CPU = 18432000
-#         F_CPU = 20000000
+MCU = atmega88p
 
+
+# Processor frequency.
+F_CPU = 12000000
 
 
 # Output format. (can be srec, ihex, binary)
@@ -284,10 +268,10 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = avr911
+AVRDUDE_PROGRAMMER = usbasp
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
-AVRDUDE_PORT = /dev/ttyUSB0
+#AVRDUDE_PORT = /dev/ttyUSB0
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
@@ -307,14 +291,14 @@ AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
 # to submit bug reports.
 #AVRDUDE_VERBOSE = -v -v
 
-AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
+AVRDUDE_FLAGS = -p $(MCU) -c $(AVRDUDE_PROGRAMMER)
 AVRDUDE_FLAGS += $(AVRDUDE_NO_VERIFY)
 AVRDUDE_FLAGS += $(AVRDUDE_VERBOSE)
 AVRDUDE_FLAGS += $(AVRDUDE_ERASE_COUNTER)
 
-AVRDUDE_HFUSE_FLAGS = -U hfuse:w:0xdf:m
-AVRDUDE_LFUSE_FLAGS = -U lfuse:w:0xf7:m
-AVRDUDE_EFUSE_FLAGS = -U efuse:w:0xf9:m
+AVRDUDE_HFUSE_FLAGS = -U hfuse:w:0xXX:m
+AVRDUDE_LFUSE_FLAGS = -U lfuse:w:0xXX:m
+AVRDUDE_EFUSE_FLAGS = -U efuse:w:0xXX:m
 
 #---------------- Debugging Options ----------------
 

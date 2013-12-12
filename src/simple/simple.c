@@ -50,7 +50,7 @@ int main (void) {
 	// GO GO GO
 	while (1) {
 		sendSPI(leds);
-		_delay_ms(1000);
+		_delay_ms(500);
 
 		leds++;
 		if (leds > 8191) {
