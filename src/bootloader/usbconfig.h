@@ -71,7 +71,7 @@
  * device is powered from the USB bus.
  */
 #ifndef USB_CFG_MAX_BUS_POWER   // allow bootloaderconfig.h to override
-#define USB_CFG_MAX_BUS_POWER           100
+#define USB_CFG_MAX_BUS_POWER           500
 #endif
 /* Set this variable to the maximum USB bus power consumption of your device.
  * The value is in milliamperes. [It will be divided by two since USB
