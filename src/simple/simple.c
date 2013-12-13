@@ -12,7 +12,6 @@ ISR (INT1_vect) {
 }
 
 void sendSPI(uint16_t data) {
-	
 	cbi(PORTB, PB2);  // Latch
 
 	SPDR = (uint8_t) ((data & 0xFF00) >> 8);
@@ -24,11 +23,9 @@ void sendSPI(uint16_t data) {
 	SPDR; // Clear SPIF
 
 	sbi(PORTB, PB2);  // Latch
-
 }
 
-int main (void) {
-
+void initHW() {
 	// Prepare Ports
 	sbi(DDRB, PB1);  // LED Output Enable Out
 	sbi(DDRB, PB2);  // LED Latch Out
@@ -45,6 +42,11 @@ int main (void) {
 	cbi(PORTB, PB1);  // LED Output Enable On
 
 	EIMSK = 1 << INT1; // Enable INT1
+}
+
+int main (void) {
+	initHW();
+
 	sei(); // Enable interrupts
 
 	// GO GO GO
@@ -56,7 +58,6 @@ int main (void) {
 		if (leds > 8191) {
 			leds = 0;
 		}
-
 	}
 
 	return 0;
