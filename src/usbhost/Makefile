@@ -26,16 +26,19 @@ LIBS=			$(USBLIBS)
 OBJ=		sldtool.o hiddata.o
 PROGRAM=	sldtool$(EXE_SUFFIX)
 
-all: $(PROGRAM)
+all: $(PROGRAM) cpu_mac
 
 $(PROGRAM): $(OBJ)
 	$(CC) -o $(PROGRAM) $(OBJ) $(LIBS)
+
+cpu_mac: cpu_mac.o hiddata.o
+	$(CC) -o cpu_mac cpu_mac.o hiddata.o $(LIBS)
 
 strip: $(PROGRAM)
 	strip $(PROGRAM)
 
 clean:
-	rm -f $(OBJ) $(PROGRAM)
+	rm -f $(OBJ) $(PROGRAM) cpu_mac
 
 .c.o:
 	$(CC) $(ARCH_COMPILE) $(CFLAGS) -c $*.c -o $*.o
