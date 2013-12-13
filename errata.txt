@@ -1,2 +1,6 @@
-No bugs discovered so far!
+REV A
+    - LEDs are way to bright
+    - Silkscreen print for board name and github address should be bigger
+    - USB 1k5 pullup should be connected to AVR PIN (connect on demand)
+
 
