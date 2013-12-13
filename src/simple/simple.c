@@ -41,7 +41,12 @@ void initHW() {
 
 	cbi(PORTB, PB1);  // LED Output Enable On
 
-	EIMSK = 1 << INT1; // Enable INT1
+	EIMSK |= (1 << INT1); // Enable INT1
+
+	// Hardware PWM reducing LED brightness
+	TCCR1A = (1 << COM1A1) | (1 << WGM11) | (1 << WGM10);
+	TCCR1B = (1 << CS11); // clk/8
+	OCR1A = 0xFFCC;
 }
 
 int main (void) {
@@ -62,4 +67,3 @@ int main (void) {
 
 	return 0;
 }
-
