@@ -19,14 +19,14 @@ EXE_SUFFIX=
 #USBLIBS=    -lhid -lusb -lsetupapi
 #EXE_SUFFIX= .exe
 
-CC=				gcc
+CC=			gcc
 CFLAGS=			-O -Wall $(USBFLAGS)
 LIBS=			$(USBLIBS)
 
 OBJ=		sldtool.o hiddata.o
 PROGRAM=	sldtool$(EXE_SUFFIX)
 
-all: $(PROGRAM) cpu_mac
+all: $(PROGRAM)
 
 $(PROGRAM): $(OBJ)
 	$(CC) -o $(PROGRAM) $(OBJ) $(LIBS)
@@ -38,7 +38,7 @@ strip: $(PROGRAM)
 	strip $(PROGRAM)
 
 clean:
-	rm -f $(OBJ) $(PROGRAM) cpu_mac
+	rm -f $(OBJ) $(PROGRAM) cpu_mac.o cpu_mac
 
 .c.o:
 	$(CC) $(ARCH_COMPILE) $(CFLAGS) -c $*.c -o $*.o
