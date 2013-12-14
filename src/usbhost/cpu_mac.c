@@ -12,9 +12,6 @@
 #include <mach/mach_host.h>
 #include <mach/mach_error.h>
 
-
-char buf[13];
-
 static char *usbErrorMessage(int errCode) {
     static char buffer[80];
 
@@ -42,42 +39,6 @@ static usbDevice_t  *openDevice(void) {
         return NULL;
     }
     return dev;
-}
-
-int maino(int argc, char **argv) {
-    printf("sldtool - http://github.com/kiu/sld\n");
-
-    int err;
-    usbDevice_t *dev;
-    if((dev = openDevice()) == NULL) {
-        exit(1);
-    }
-
-    do {
-	do {
-	    err = read(0, buf, sizeof(buf));
-	    if (err == EOF || err <= 0) {
-		exit(0);
-	    }
-	} while (err != sizeof(buf));
-
-	printf("Sending:");
-	int i = 0;
-	for (; i < sizeof(buf); i++) {
-	    printf(" %02x", (unsigned char)buf[i]);
-	}
-	printf("\n");
-
-        if((err = usbhidSetReport(dev, buf, sizeof(buf))) != 0) {   /* add a dummy report ID */
-            fprintf(stderr, "error writing data: %s\n", usbErrorMessage(err));
-	    exit(1);
-	}
-
-    } while(1);
-
-    usbhidCloseDevice(dev);
-
-    return 0;
 }
 
 int main(int argc, char *argv[])
