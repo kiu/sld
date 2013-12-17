@@ -19,7 +19,7 @@ while true do
   lights = []
   (13 - minutes).times { lights << 0x00 }
   minutes.times { lights << 0x0f }
-  IO.popen('./../usbhost/sldtool_mac', 'w') { |sld| sld.write lights.pack('C*') }
+  IO.popen('./../../usbhost/sldtool_mac', 'w') { |sld| sld.write lights.pack('C*') }
 
   sleep(10)
 end
