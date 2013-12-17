@@ -6,6 +6,20 @@ require 'bundler'
 Bundler.setup
 Bundler.require
 
-result = MVG::Live.fetch('Trappentreustraße')
+unless ARGV.length == 2
+  puts 'Run as ./tram-countdow [line] [destination]'
+end
+line        = ARGV[0]
+destination = ARGV[1]
 
-puts result.select { |info| info[:line] == '18' && info[:destination] == 'Effnerplatz' }.map { |info| info[:minutes] }.min
+while true do
+  result  = MVG::Live.fetch('Trappentreustraße')
+  minutes = result.select { |info| info[:line] == line && info[:destination] == destination }.map { |info| info[:minutes] }.min || 0
+
+  lights = []
+  (13 - minutes).times { lights << 0x00 }
+  minutes.times { lights << 0x0f }
+  IO.popen('./../usbhost/sldtool_mac', 'w') { |sld| sld.write lights.pack('C*') }
+
+  sleep(10)
+end
