@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler'
+
+Bundler.setup
+Bundler.require
+
+result = MVG::Live.fetch('Trappentreustraße')
+
+puts result.select { |info| info[:line] == '18' && info[:destination] == 'Effnerplatz' }.map { |info| info[:minutes] }.min
