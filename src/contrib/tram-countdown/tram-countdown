@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 
 require 'rubygems'
 require 'bundler'
@@ -8,6 +9,7 @@ Bundler.require
 
 unless ARGV.length == 2
   puts 'Run as ./tram-countdow [line] [destination]'
+  exit(1)
 end
 line        = ARGV[0]
 destination = ARGV[1]
