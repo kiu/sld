@@ -2,10 +2,7 @@
 # coding: utf-8
 
 require 'rubygems'
-require 'bundler'
-
-Bundler.setup
-Bundler.require
+require 'mvg/live'
 
 unless ARGV.length == 2
   puts 'Run as ./tram-countdow [line] [destination]'
