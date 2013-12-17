@@ -8,8 +8,8 @@ For e.g. Line 18 to Effnerplatz, run:
 ./tram-countdown 18 Effnerplatz
 ```
 
-This requires Ruby 2.0. Also you need to bundle the dependencies first:
+This runs with your Mac's system Ruby but you need to install the `mvg-live` gem:
 
 ```
-bundle install
+sudo /usr/bin/gem install mvg-live
 ```

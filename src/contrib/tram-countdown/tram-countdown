@@ -1,24 +1,23 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 
 require 'rubygems'
-require 'bundler'
-
-Bundler.setup
-Bundler.require
+require 'mvg/live'
 
 unless ARGV.length == 2
   puts 'Run as ./tram-countdow [line] [destination]'
+  exit(1)
 end
 line        = ARGV[0]
 destination = ARGV[1]
 
 while true do
   result  = MVG::Live.fetch('Trappentreustraße')
-  minutes = result.select { |info| info[:line] == line && info[:destination] == destination }.map { |info| info[:minutes] }.min || 0
+  minutes = result.select { |info| info[:line] == line && info[:destination] == destination && info[:minutes] > 0 }.map { |info| info[:minutes] }.min || 0
 
   lights = []
   (13 - minutes).times { lights << 0x00 }
-  minutes.times { lights << 0x0f }
+  minutes.times { lights << 0x05 }
   IO.popen('./../../usbhost/sldtool_mac', 'w') { |sld| sld.write lights.pack('C*') }
 
   sleep(10)
