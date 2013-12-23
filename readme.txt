@@ -24,7 +24,9 @@ Directory structure:
     /pcb/gerber		Board as Gerber files
 
     /src/bootloader	Bootloader running on the device
+    /src/contrib	Third party contributions
     /src/firmware	Main app running on the device
     /src/helper		Helper scripts for mass flashing
     /src/simple		A simple example app
     /src/usbhost	Host tool to control LEDs
+
