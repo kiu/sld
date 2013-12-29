@@ -1,6 +1,5 @@
-http://github.com/kiu/sld
-
 SLDongle (SLD) provides an inexpensive entry into the world of microcontroller development.
+http://schoar.de/tinkering/sld
 
 Control LEDs from host:
     1. Plug SLD into USB port
