@@ -1,6 +1,5 @@
-http://github.com/kiu/sld
-
 SLDongle (SLD) provides an inexpensive entry into the world of microcontroller development.
+http://schoar.de/tinkering/sld
 
 Control LEDs from host:
     1. Plug SLD into USB port
@@ -24,7 +23,9 @@ Directory structure:
     /pcb/gerber		Board as Gerber files
 
     /src/bootloader	Bootloader running on the device
+    /src/contrib	Third party contributions
     /src/firmware	Main app running on the device
     /src/helper		Helper scripts for mass flashing
     /src/simple		A simple example app
     /src/usbhost	Host tool to control LEDs
+
