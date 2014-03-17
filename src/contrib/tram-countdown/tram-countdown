@@ -5,15 +5,15 @@ require 'rubygems'
 require 'mvg/live'
 
 unless ARGV.length == 2
-  puts 'Run as ./tram-countdow [line] [destination]'
+  puts 'Run as ./tram-countdow [line] [destination1;destination2;...]'
   exit(1)
 end
-line        = ARGV[0]
-destination = ARGV[1]
+line         = ARGV[0]
+destinations = ARGV[1].split(';').map(&:strip)
 
 while true do
   result  = MVG::Live.fetch('Trappentreustraße')
-  minutes = result.select { |info| info[:line] == line && info[:destination] == destination && info[:minutes] > 0 }.map { |info| info[:minutes] }.min || 0
+  minutes = result.select { |info| info[:line] == line && destinations.include?(info[:destination]) && info[:minutes] > 0 }.map { |info| info[:minutes] }.min || 0
 
   lights = []
   (13 - minutes).times { lights << 0x00 }
